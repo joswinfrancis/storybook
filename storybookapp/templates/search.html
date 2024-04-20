@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Search Story</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Search page</h1>
+    {% if query %}
+        {% if results %}
+            <h3>{% with results.count as total_results %} Found {{total_results}} results 
+               </h3>
+             {% for x in results %}
+             <div class="mt-3">
+                <a href="{{ x.get_absolute_url }}"><h2>{{ x.title }}</h2></a>
+                <p>{{ x.des }}</p>
+             </div>
+             {% endfor %}
+               {% endwith %}
+        {% else %}
+            <h3>No results found</h3>
+        {% endif %}
+    {% else %}
+        <h3>Error in your query</h3>
+    {% endif %}
+</div>
+{% endblock %}
